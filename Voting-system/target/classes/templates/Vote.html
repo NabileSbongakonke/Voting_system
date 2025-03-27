@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"   th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .vote-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #0077CC;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+    </style>
+</head>
+<body>
+    <div class="vote-container">
+        <h2>Cast Your Vote</h2>
+        <form action="/vote" method="POST" th:object="${vote}">
+            <label for="candidates">Choose a candidate:</label>
+            <select id="candidates" name="party" th:field="*{party}" required>
+             <option value="" disabled selected>Select a candidate</option>
+           <option th:each="party : ${parties}" th:value="${party.name}" th:text="${party.name}"></option>
+           </select>
+
+            <button type="submit">Vote</button>
+        </form>
+    </div>
+</body>
+</html>
